@@ -1,4 +1,4 @@
-// ttkeep CLI — see Core.swift.
+// HoldColorTemp CLI — see Core.swift.
 import Foundation
 import CoreGraphics
 
@@ -64,7 +64,7 @@ case "apply": cmdApply(hold: hold)
 case "run": cmdRun()
 default:
     print("""
-    usage: ttkeep <command> [options]
+    usage: holdcolortemp <command> [options]
       status                 lid state; per external display: live True Tone gains, saved gains, applied table
       apply [--hold s]       visual test: apply saved True Tone gains for s seconds (default 20), then restore
       run                    service: hold True Tone's colour on external displays while the lid is closed

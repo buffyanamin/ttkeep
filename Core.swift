@@ -1,4 +1,4 @@
-// ttkeep core — keep True Tone's colour on external displays after the MacBook lid closes.
+// HoldColorTemp core — keep True Tone's colour on external displays after the MacBook lid closes.
 //
 // While the lid is open, True Tone (CoreBrightness) applies a per-display colour matrix that
 // `/usr/libexec/corebrightnessdiag status-info` reports. We snapshot each display's white gains
@@ -16,7 +16,7 @@ struct Config {
     var settle = 10.0     // ignore snapshots taken this close to the lid-close moment
 }
 
-let stateDir = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Application Support/ttkeep")
+let stateDir = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Application Support/HoldColorTemp")
 let stateFile = stateDir.appendingPathComponent("gains.json")
 
 func log(_ s: String) {
@@ -229,7 +229,7 @@ final class Engine {
     }
 
     func start() {
-        log(String(format: "ttkeep started: gamma=%.2f interval=%.0fs settle=%.0fs", cfg.gamma, cfg.interval, cfg.settle))
+        log(String(format: "HoldColorTemp started: gamma=%.2f interval=%.0fs settle=%.0fs", cfg.gamma, cfg.interval, cfg.settle))
         CGDisplayRegisterReconfigurationCallback({ _, flags, ctx in
             if flags.contains(.beginConfigurationFlag) { return }
             let e = Unmanaged<Engine>.fromOpaque(ctx!).takeUnretainedValue()

@@ -1,4 +1,4 @@
-// ttkeep menu bar app — see Core.swift for the engine.
+// HoldColorTemp menu bar app — see Core.swift for the engine.
 import AppKit
 import ServiceManagement
 
@@ -35,10 +35,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let kelvin = ks.isEmpty ? nil : ks.reduce(0, +) / Double(ks.count)
         let kText = kelvin.map { String(format: " ~%.0fK", $0) } ?? ""
         let tip: String = switch engine.phase {
-        case .holding:  "ttkeep: holding True Tone colour\(kText) (lid closed)"
-        case .tracking: "ttkeep: following True Tone\(kText) (lid open)"
-        case .paused:   "ttkeep: paused"
-        case .starting: "ttkeep"
+        case .holding:  "HoldColorTemp: holding True Tone colour\(kText) (lid closed)"
+        case .tracking: "HoldColorTemp: following True Tone\(kText) (lid open)"
+        case .paused:   "HoldColorTemp: paused"
+        case .starting: "HoldColorTemp"
         }
         item.button?.image = Self.icon(phase: engine.phase, kelvin: kelvin)
         item.button?.toolTip = tip
@@ -160,7 +160,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(displaysPrefs)
 
         menu.addItem(.separator())
-        let quit = NSMenuItem(title: "Quit ttkeep", action: #selector(quit), keyEquivalent: "q")
+        let quit = NSMenuItem(title: "Quit HoldColorTemp", action: #selector(quit), keyEquivalent: "q")
         quit.target = self
         menu.addItem(quit)
     }
@@ -193,7 +193,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         } catch {
             let a = NSAlert()
             a.messageText = "Couldn't change Launch at Login"
-            a.informativeText = "\(error.localizedDescription)\n\nMove ttkeep.app to ~/Applications or /Applications and try again, or add it in System Settings → General → Login Items."
+            a.informativeText = "\(error.localizedDescription)\n\nMove HoldColorTemp.app to ~/Applications or /Applications and try again, or add it in System Settings → General → Login Items."
             a.runModal()
         }
     }
@@ -204,7 +204,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 }
 
 @main
-enum TTKeepApp {
+enum HoldColorTempApp {
     static let delegate = AppDelegate()
     static func main() {
         let app = NSApplication.shared
